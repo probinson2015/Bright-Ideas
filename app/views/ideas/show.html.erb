@@ -8,7 +8,7 @@
 	<th>Alias</th>
 	<th>Name </th>
 <% if @idea.users_liked.count > 0 %>
- <% @idea.users_liked.each do |u| %>
+ <% @idea.users_liked.uniq.each do |u| %>
 <tr>
 	<td><a href="/users/<%= u.id %>"><%= u.alias %></a></td>
 	<td><%= u.name %></td>
