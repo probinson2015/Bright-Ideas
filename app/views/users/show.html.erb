@@ -1,0 +1,10 @@
+<a href="/ideas">Bright Ideas</a> | <a href="/sessions/destroy">Logout</a>
+
+<h3>Name: <%= @user.name %></h3>
+<h3>Alias: <%= @user.alias %></h3>
+<h3>Email: <%= @user.email %></h3>
+<hr>
+
+<h3>Total Number of Ideas: <%= @user.ideas.count %> </h3>
+<h3>Total Number of Ideas Liked: <%= @user.ideas_liked.count %> </h3>
+
