@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   post 'likes' => 'likes#create'
 
+  get 'sessions/destroy' => 'sessions#destroy'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

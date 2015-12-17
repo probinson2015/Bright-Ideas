@@ -12,7 +12,8 @@ class IdeasController < ApplicationController
   		flash[:errors] = idea.errors.full_messages
     end
   	redirect_to '/ideas'
-  	end
+  end
+  
   	def show
   		@idea = Idea.find(params[:id])
   	end

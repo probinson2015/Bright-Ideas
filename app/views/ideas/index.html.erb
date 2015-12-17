@@ -1,10 +1,12 @@
-<a href="/users/<%=session[:user_id]%>"> My Profile </a>
+<a href="/users/<%=session[:user_id]%>"> My Profile </a> |  <a href="/sessions/destroy">Logout</a>
 <h1>Hi <%=@user.name %></h1>
+
 <% if flash[:errors] %>
-<% flash[:errors].each do |e| %>
-<%= e %>
-<% end 
+	<% flash[:errors].each do |e| %>
+	<%= e %>
+	<% end 
 end %>
+
 <form method="post" action="/ideas">
 	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 	<input type="text" name="comment" placeholder="Enter your Big Idea!">
@@ -12,23 +14,23 @@ end %>
 </form>
 
 <% if @ideas %>
-<% @ideas.each do |i| %>
-<p><a href="/users/<%= i.user.id %>"><%= i.user.name %></a> says: <%= i.comment %></p>
-<form method="post" action="/likes">
-	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-	<input type="hidden" value="<%=i.id%>" name="idea_id">
-	<input type="submit" value="Like!">
-</form>
+	<% @ideas.each do |i| %>
+		<p><a href="/users/<%= i.user.id %>"><%= i.user.name %></a> says: <%= i.comment %></p>
+		<form method="post" action="/likes">
+			<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+			<input type="hidden" value="<%=i.id%>" name="idea_id">
+			<input type="submit" value="Like!">
+		</form>
 
-<% if i.user.id == session[:user_id] %>
-	<form action="/ideas" method="post">
-		<input type="hidden"name="_method" value="delete">
-		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
-		<input type="hidden" value="<%=i.id %>" name="idea_id">
-		<input type="submit" value="Delete">
-	</form>
-<% end %>	
+		<% if i.user.id == session[:user_id] %>
+			<form action="/ideas" method="post">
+				<input type="hidden"name="_method" value="delete">
+				<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+				<input type="hidden" value="<%=i.id %>" name="idea_id">
+				<input type="submit" value="Delete">
+			</form>
+		<% end %>	
 
-<p><a href="/ideas/<%=i.id%>"><%=i.users_liked.count%> people </a> like this!</p>
-<% end 
+		<p><a href="/ideas/<%=i.id%>"><%=i.users_liked.count%> people </a> like this!</p>
+	<% end 
 end %>
